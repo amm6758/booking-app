@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 export default function Home() {
   const [search, setSearch] = useState("");
   const categoryRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
 
   const categories = [
     { label: "Party House", emoji: "🎉" },
@@ -21,9 +23,30 @@ export default function Home() {
     { label: "30 Day Rentals", emoji: "📅" }
   ];
 
-  const scrollCategories = () => {
+  // Function to check visibility of left and right arrows
+  const updateArrowVisibility = () => {
     if (categoryRef.current) {
-      categoryRef.current.scrollLeft += 200;
+      const { scrollLeft, scrollWidth, clientWidth } = categoryRef.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
+    }
+  };
+
+  useEffect(() => {
+    updateArrowVisibility(); // Run on mount
+    window.addEventListener("resize", updateArrowVisibility);
+    return () => window.removeEventListener("resize", updateArrowVisibility);
+  }, []);
+
+  const scrollCategories = (direction: "left" | "right") => {
+    if (categoryRef.current) {
+      const scrollAmount = 200;
+      categoryRef.current.scrollBy({
+        left: direction === "right" ? scrollAmount : -scrollAmount,
+        behavior: "smooth",
+      });
+
+      setTimeout(updateArrowVisibility, 500);
     }
   };
 
@@ -58,6 +81,16 @@ export default function Home() {
 
       {/* Category Boxes Section */}
       <div className="relative w-full max-w-6xl mt-6 flex items-center">
+        {/* Left Scroll Arrow */}
+        {showLeftArrow && (
+          <button
+            onClick={() => scrollCategories("left")}
+            className="absolute left-0 bg-black text-white p-3 rounded-full hover:scale-110 transition-transform"
+          >
+            <IoIosArrowBack size={20} />
+          </button>
+        )}
+
         {/* Categories Container */}
         <div
           ref={categoryRef}
@@ -67,6 +100,7 @@ export default function Home() {
             msOverflowStyle: "none",
             scrollBehavior: "smooth",
           }}
+          onScroll={updateArrowVisibility}
         >
           {categories.map((category, index) => (
             <div
@@ -74,19 +108,21 @@ export default function Home() {
               className="p-4 text-center border-2 border-black rounded-lg bg-gray-200 hover:bg-gray-300 cursor-pointer transform transition-transform duration-200 hover:scale-105"
               style={{ boxShadow: "0 0 0 2px black inset" }} // Keeps border on hover
             >
-              <span className="text-xl font-semibold">{category.label}</span>
-              <div className="text-2xl mt-1">{category.emoji}</div>
+              <span className="text-xl font-semibold text-black">{category.label}</span>
+              <div className="text-2xl mt-1 text-black">{category.emoji}</div>
             </div>
           ))}
         </div>
 
-        {/* Scroll Arrow */}
-        <button
-          onClick={scrollCategories}
-          className="absolute right-0 bg-black text-white p-3 rounded-full hover:scale-110 transition-transform"
-        >
-          <IoIosArrowForward size={20} />
-        </button>
+        {/* Right Scroll Arrow */}
+        {showRightArrow && (
+          <button
+            onClick={() => scrollCategories("right")}
+            className="absolute right-0 bg-black text-white p-3 rounded-full hover:scale-110 transition-transform"
+          >
+            <IoIosArrowForward size={20} />
+          </button>
+        )}
       </div>
     </div>
   );
