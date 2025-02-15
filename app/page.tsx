@@ -49,12 +49,13 @@ export default function Home() {
         {/* Categories Scroll Container */}
         <div
           ref={categoryRef}
-          className="flex gap-2 w-full overflow-x-auto scrollbar-hide scroll-smooth"
+          className="flex gap-2 w-full scrollbar-none scroll-smooth"
+          style={{ overflow: "hidden" }}
         >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-black"
+              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4 hover:shadow-lg"
             >
               <span className="text-black text-sm font-normal">{category.label}</span>
               <span className="text-3xl">{category.emoji}</span>
