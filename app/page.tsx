@@ -54,7 +54,7 @@ export default function Home() {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4"
+              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-black"
             >
               <span className="text-black text-sm font-normal">{category.label}</span>
               <span className="text-3xl">{category.emoji}</span>
