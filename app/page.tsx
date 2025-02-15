@@ -25,7 +25,7 @@ export default function Home() {
 
   const scrollCategories = (direction: "left" | "right") => {
     if (categoryRef.current) {
-      const scrollAmount = 200;
+      const scrollAmount = 220;
       if (direction === "right") {
         categoryRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
       } else {
@@ -70,7 +70,7 @@ export default function Home() {
         {!atStart && (
           <button
             onClick={() => scrollCategories("left")}
-            className="absolute left-0 z-10 text-black text-3xl w-10 h-10 flex items-center justify-center bg-gray-400 bg-opacity-95 rounded-full"
+            className="absolute left-0 z-10 text-black text-3xl w-12 h-12 flex items-center justify-center bg-gray-400 bg-opacity-95 rounded-full"
           >
             <IoIosArrowBack />
           </button>
@@ -84,10 +84,10 @@ export default function Home() {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="w-[220px] h-[80px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg transition-transform duration-200 hover:scale-105"
+              className="w-[260px] h-[120px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-transform duration-200 hover:scale-105"
             >
-              <span className="text-black text-lg font-semibold">{category.label}</span>
-              <span className="text-2xl">{category.emoji}</span>
+              <span className="text-black text-xl font-semibold">{category.label}</span>
+              <span className="text-3xl">{category.emoji}</span>
             </div>
           ))}
         </div>
@@ -96,7 +96,7 @@ export default function Home() {
         {!atEnd && (
           <button
             onClick={() => scrollCategories("right")}
-            className="absolute right-0 z-10 text-black text-3xl w-10 h-10 flex items-center justify-center bg-gray-400 bg-opacity-95 rounded-full"
+            className="absolute right-0 z-10 text-black text-3xl w-12 h-12 flex items-center justify-center bg-gray-400 bg-opacity-95 rounded-full"
           >
             <IoIosArrowForward />
           </button>
