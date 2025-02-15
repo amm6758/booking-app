@@ -11,30 +11,33 @@ export default function Home() {
             alignItems: "center",
             justifyContent: "center",
             height: "100vh",
+            width: "100vw",
             backgroundColor: "#f5f5f5",
-            textAlign: "center",
-            padding: "20px"
+            padding: "5%",
+            boxSizing: "border-box"
         }}>
             {/* Search Bar Container */}
             <div style={{
                 display: "flex",
+                flexDirection: "column",
                 alignItems: "center",
-                gap: "10px",
+                width: "100%",
+                maxWidth: "500px",
                 marginBottom: "20px"
             }}>
                 {/* Search Label inside Opaque Rectangle */}
                 <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "100px",
+                    width: "100%",
                     height: "44px",
                     fontSize: "1rem",
                     fontWeight: "bold",
                     color: "#333",
-                    backgroundColor: "rgba(0, 0, 0, 0.1)", // Opaque background
-                    borderRadius: "10px", // Rounded edges
-                    textAlign: "center"
+                    backgroundColor: "rgba(0, 0, 0, 0.1)",
+                    borderRadius: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "10px"
                 }}>
                     Search
                 </div>
@@ -42,9 +45,7 @@ export default function Home() {
                 {/* Search Bar with Icon */}
                 <div style={{
                     position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    width: "300px"
+                    width: "100%",
                 }}>
                     <input
                         type="text"
@@ -58,8 +59,8 @@ export default function Home() {
                             border: "2px solid #ccc",
                             borderRadius: "10px",
                             outline: "none",
-                            textAlign: "left",
-                            transition: "border-color 0.2s ease-in-out"
+                            transition: "border-color 0.2s ease-in-out",
+                            boxSizing: "border-box"
                         }}
                         onFocus={(e) => e.target.style.borderColor = "#0070f3"}
                         onBlur={(e) => e.target.style.borderColor = "#ccc"}
@@ -69,6 +70,8 @@ export default function Home() {
                     <span style={{
                         position: "absolute",
                         right: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
                         fontSize: "1rem",
                         color: "#888",
                         pointerEvents: "none"
@@ -79,9 +82,10 @@ export default function Home() {
             {/* Category Boxes */}
             <div style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
                 gap: "10px",
-                marginBottom: "20px"
+                width: "100%",
+                maxWidth: "500px"
             }}>
                 {[
                     { title: "Party House", emoji: "🎉" },
@@ -94,7 +98,6 @@ export default function Home() {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        width: "150px",
                         height: "100px",
                         border: "2px solid black",
                         borderRadius: "10px",
@@ -103,7 +106,8 @@ export default function Home() {
                         fontWeight: "500",
                         color: "gray",
                         transition: "transform 0.2s ease-in-out",
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        boxSizing: "border-box"
                     }}
                         onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
                         onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
@@ -112,28 +116,6 @@ export default function Home() {
                     </div>
                 ))}
             </div>
-
-            {/* Title */}
-            <h1 style={{ fontSize: "2.5rem", color: "#333" }}>
-                🚀 Welcome to My Booking Site!
-            </h1>
-            <p style={{ fontSize: "1.2rem", color: "#666" }}>
-                Book your dream stay now! 🎉
-            </p>
-
-            {/* Browse Listings Button */}
-            <button style={{
-                marginTop: "20px",
-                padding: "10px 20px",
-                fontSize: "1rem",
-                backgroundColor: "#0070f3",
-                color: "#fff",
-                border: "none",
-                borderRadius: "10px",
-                cursor: "pointer"
-            }}>
-                Browse Listings
-            </button>
         </div>
     );
 }
