@@ -6,6 +6,7 @@ import { FaSearch } from "react-icons/fa";
 export default function Home() {
   const [search, setSearch] = useState("");
   const categoryRef = useRef(null);
+
   const categories = [
     { label: "Party House", emoji: "🎉" },
     { label: "Solo Traveler", emoji: "🎒" },
@@ -21,8 +22,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
-      {/* Search Bar and Date Picker */}
+      {/* Search and Date Picker Section */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4 items-center">
+        {/* Search Bar */}
         <div className="relative flex-1">
           <input
             type="text"
@@ -33,22 +35,30 @@ export default function Home() {
           />
           <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
         </div>
+
+        {/* Date Picker */}
         <div className="flex gap-2">
-          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
-          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
+          <input
+            type="date"
+            className="p-3 text-black rounded-full border border-gray-400"
+          />
+          <input
+            type="date"
+            className="p-3 text-black rounded-full border border-gray-400"
+          />
         </div>
       </div>
 
-      {/* Categories */}
-      <div className="w-full max-w-6xl overflow-hidden mt-6" ref={categoryRef}>
-        <div className="flex gap-3 whitespace-nowrap overflow-x-auto no-scrollbar">
+      {/* Category Boxes Section */}
+      <div className="w-full max-w-6xl mt-6 overflow-hidden">
+        <div ref={categoryRef} className="flex gap-4 overflow-x-auto scrollbar-hide">
           {categories.map((category, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-center min-w-[140px] min-h-[140px] bg-white border-2 border-black rounded-lg text-black hover:scale-105 transition-transform cursor-pointer shadow-md"
+              className="flex flex-col items-center justify-center min-w-[150px] h-[100px] bg-white border-2 border-black rounded-lg shadow-md transition-transform transform hover:scale-105 hover:shadow-lg"
             >
-              <span className="text-lg font-medium">{category.label}</span>
-              <span className="text-2xl mt-1">{category.emoji}</span>
+              <span className="text-xl font-medium text-black">{category.label}</span>
+              <span className="text-2xl">{category.emoji}</span>
             </div>
           ))}
         </div>
