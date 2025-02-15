@@ -14,7 +14,7 @@ export default function Home() {
     { label: "On a Budget", emoji: "💸" },
     { label: "City", emoji: "🏙️" },
     { label: "Pet Friendly", emoji: "🐶" },
-    { label: "By the Beach", emoji: "🏝️" }, // Updated text
+    { label: "By the Beach", emoji: "🏝️" },
     { label: "Mexico", emoji: "🇲🇽" },
     { label: "USA", emoji: "🇺🇸" },
     { label: "30 Day Rentals", emoji: "📅" },
@@ -49,13 +49,12 @@ export default function Home() {
         {/* Categories Scroll Container */}
         <div
           ref={categoryRef}
-          className="flex gap-2 w-full scrollbar-none scroll-smooth"
-          style={{ overflow: "hidden" }}
+          className="flex gap-2 w-full overflow-x-auto scrollbar-hide scroll-smooth"
         >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4 hover:shadow-lg"
+              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4"
             >
               <span className="text-black text-sm font-normal">{category.label}</span>
               <span className="text-3xl">{category.emoji}</span>
