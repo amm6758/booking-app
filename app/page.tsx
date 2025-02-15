@@ -6,7 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const categoryRef = useRef(null);
+  const categoryRef = useRef<HTMLDivElement | null>(null);
 
   const categories = [
     { label: "Party House", emoji: "🎉" },
@@ -22,7 +22,7 @@ export default function Home() {
   ];
 
   const scrollCategories = () => {
-    if (categoryRef.current) {
+    if (categoryRef.current instanceof HTMLDivElement) {
       categoryRef.current.scrollBy({ left: 150, behavior: "smooth" });
     }
   };
