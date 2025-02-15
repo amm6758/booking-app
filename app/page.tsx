@@ -17,7 +17,6 @@ const categories = [
     { label: "Mexico", emoji: "🇲🇽" },
     { label: "USA", emoji: "🇺🇸" },
     { label: "30 Day Rentals", emoji: "📅" }
-];
   ];
 
   return (
