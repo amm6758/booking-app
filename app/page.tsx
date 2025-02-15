@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const categoryRef = useRef(null);
+  const categoryRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     { label: "Party House", emoji: "🎉" },
@@ -22,8 +22,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
+      
       {/* Search and Date Picker Section */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4 items-center">
+        
         {/* Search Bar */}
         <div className="relative flex-1">
           <input
@@ -51,13 +53,16 @@ export default function Home() {
 
       {/* Category Boxes Section */}
       <div className="w-full max-w-6xl mt-6 overflow-hidden">
-        <div ref={categoryRef} className="flex gap-4 overflow-x-auto scrollbar-hide">
+        <div
+          ref={categoryRef}
+          className="flex gap-4 w-full overflow-x-auto no-scrollbar"
+        >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-center min-w-[150px] h-[100px] bg-white border-2 border-black rounded-lg shadow-md transition-transform transform hover:scale-105 hover:shadow-lg"
+              className="flex flex-col items-center justify-center w-48 h-24 bg-white border-2 border-black rounded-lg text-black text-lg font-medium hover:scale-105 transition-transform"
             >
-              <span className="text-xl font-medium text-black">{category.label}</span>
+              <span>{category.label}</span>
               <span className="text-2xl">{category.emoji}</span>
             </div>
           ))}
@@ -66,4 +71,3 @@ export default function Home() {
     </div>
   );
 }
-
