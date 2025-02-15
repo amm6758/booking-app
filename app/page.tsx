@@ -70,9 +70,9 @@ export default function Home() {
         {!atStart && (
           <button
             onClick={() => scrollCategories("left")}
-            className="absolute left-0 z-10 bg-black text-white p-3 rounded-full shadow-lg"
+            className="absolute left-0 z-10 text-black text-3xl"
           >
-            <IoIosArrowBack size={24} />
+            <IoIosArrowBack />
           </button>
         )}
 
@@ -84,7 +84,7 @@ export default function Home() {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="w-[180px] h-[100px] flex flex-col items-center justify-center p-4 border-4 border-black bg-gray-200 rounded-lg transition-transform duration-200 hover:scale-105"
+              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 border-4 border-black bg-gray-200 rounded-lg transition-transform duration-200 hover:scale-105"
             >
               <span className="text-black text-xl font-semibold">{category.label}</span>
               <span className="text-3xl">{category.emoji}</span>
@@ -96,9 +96,9 @@ export default function Home() {
         {!atEnd && (
           <button
             onClick={() => scrollCategories("right")}
-            className="absolute right-0 z-10 bg-black text-white p-3 rounded-full shadow-lg"
+            className="absolute right-0 z-10 text-black text-3xl"
           >
-            <IoIosArrowForward size={24} />
+            <IoIosArrowForward />
           </button>
         )}
       </div>
