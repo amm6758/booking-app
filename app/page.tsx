@@ -15,28 +15,56 @@ export default function Home() {
             textAlign: "center",
             padding: "20px"
         }}>
-            {/* Search Bar */}
-            <input
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="City, State, Country"
-                style={{
-                    width: "300px",
-                    padding: "10px",
-                    fontSize: "1rem",
-                    border: "2px solid #ccc",
-                    borderRadius: "5px",
-                    outline: "none",
-                    textAlign: "center",
-                    transition: "border-color 0.2s ease-in-out"
-                }}
-                onFocus={(e) => e.target.style.borderColor = "#0070f3"}
-                onBlur={(e) => e.target.style.borderColor = "#ccc"}
-            />
+            {/* Search Bar Container */}
+            <div style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "20px",
+                gap: "10px"
+            }}>
+                {/* Search Label */}
+                <label style={{ fontSize: "1rem", fontWeight: "bold", color: "#333" }}>
+                    Search:
+                </label>
+
+                {/* Search Bar with Icon */}
+                <div style={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center"
+                }}>
+                    {/* Magnifying Glass Icon (Emoji) */}
+                    <span style={{
+                        position: "absolute",
+                        left: "10px",
+                        fontSize: "1rem",
+                        color: "#888"
+                    }}>🔍</span>
+
+                    {/* Search Input */}
+                    <input
+                        type="text"
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                        placeholder="City, State, Country"
+                        style={{
+                            width: "300px",
+                            padding: "10px 10px 10px 35px",
+                            fontSize: "1rem",
+                            border: "2px solid #ccc",
+                            borderRadius: "5px",
+                            outline: "none",
+                            textAlign: "left",
+                            transition: "border-color 0.2s ease-in-out"
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = "#0070f3"}
+                        onBlur={(e) => e.target.style.borderColor = "#ccc"}
+                    />
+                </div>
+            </div>
 
             {/* Title */}
-            <h1 style={{ fontSize: "2.5rem", color: "#333", marginTop: "20px" }}>
+            <h1 style={{ fontSize: "2.5rem", color: "#333" }}>
                 🚀 Welcome to My Booking Site!
             </h1>
             <p style={{ fontSize: "1.2rem", color: "#666" }}>
