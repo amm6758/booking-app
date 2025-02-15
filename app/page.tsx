@@ -6,12 +6,18 @@ import { IoIosArrowForward } from "react-icons/io";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const categories = [
-    { label: "Party House", emoji: "🎉" },  
+const categories = [
+    { label: "Party House", emoji: "🎉" },
     { label: "Solo Traveler", emoji: "🎒" },
     { label: "Luxury Stay", emoji: "🤑" },
     { label: "On a Budget", emoji: "💸" },
     { label: "City", emoji: "🏙️" },
+    { label: "Pet Friendly", emoji: "🐶" },
+    { label: "Beach Side", emoji: "🏝️" },
+    { label: "Mexico", emoji: "🇲🇽" },
+    { label: "USA", emoji: "🇺🇸" },
+    { label: "30 Day Rentals", emoji: "📅" }
+];
   ];
 
   return (
