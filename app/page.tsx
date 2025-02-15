@@ -7,8 +7,8 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 export default function Home() {
   const [search, setSearch] = useState("");
   const categoryRef = useRef<HTMLDivElement>(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
 
   const categories = [
     { label: "Party House", emoji: "🎉" },
@@ -20,27 +20,24 @@ export default function Home() {
     { label: "Beach Side", emoji: "🏝️" },
     { label: "Mexico", emoji: "🇲🇽" },
     { label: "USA", emoji: "🇺🇸" },
-    { label: "30 Day Rentals", emoji: "📅" }
+    { label: "30 Day Rentals", emoji: "📅" },
   ];
 
   const scrollCategories = (direction: "left" | "right") => {
     if (categoryRef.current) {
       const scrollAmount = 200;
-      if (direction === "left") {
-        categoryRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      } else {
+      if (direction === "right") {
         categoryRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      } else {
+        categoryRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
       }
 
       setTimeout(() => {
         if (categoryRef.current) {
-          setShowLeftArrow(categoryRef.current.scrollLeft > 0);
-          setShowRightArrow(
-            categoryRef.current.scrollLeft + categoryRef.current.clientWidth <
-            categoryRef.current.scrollWidth
-          );
+          setAtStart(categoryRef.current.scrollLeft === 0);
+          setAtEnd(categoryRef.current.scrollLeft + categoryRef.current.clientWidth >= categoryRef.current.scrollWidth);
         }
-      }, 300);
+      }, 500);
     }
   };
 
@@ -55,62 +52,53 @@ export default function Home() {
             placeholder="City, State, Country"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-3 pl-4 pr-12 text-black rounded-full border border-gray-400"
+            className="w-full p-3 pl-4 pr-12 text-black rounded-full border border-black"
           />
-          <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600" />
+          <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black" />
         </div>
 
         {/* Date Picker */}
         <div className="flex gap-2">
-          <input
-            type="date"
-            className="p-3 text-black rounded-full border border-gray-400"
-          />
-          <input
-            type="date"
-            className="p-3 text-black rounded-full border border-gray-400"
-          />
+          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
+          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
         </div>
       </div>
 
       {/* Category Boxes Section */}
       <div className="relative w-full max-w-6xl mt-6 flex items-center">
-        {/* Left Scroll Arrow */}
-        {showLeftArrow && (
+        {/* Left Arrow */}
+        {!atStart && (
           <button
             onClick={() => scrollCategories("left")}
-            className="absolute left-2 z-10 bg-black/95 text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md"
-            style={{ top: "50%", transform: "translateY(-50%)" }}
+            className="absolute left-0 z-10 bg-black text-white p-3 rounded-full shadow-lg"
           >
-            <IoIosArrowBack size={20} />
+            <IoIosArrowBack size={24} />
           </button>
         )}
 
-        {/* Scrollable Category Container */}
+        {/* Categories Scroll Container */}
         <div
           ref={categoryRef}
-          className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth w-full px-6"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex gap-4 w-full overflow-x-auto scrollbar-hide scroll-smooth"
         >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="min-w-[120px] flex flex-col items-center justify-center p-4 border-[2.5px] border-black bg-gray-200 rounded-lg cursor-pointer transform transition-transform hover:scale-105"
+              className="w-[180px] h-[100px] flex flex-col items-center justify-center p-4 border-4 border-black bg-gray-200 rounded-lg transition-transform duration-200 hover:scale-105"
             >
-              <span className="text-xl">{category.emoji}</span>
-              <span className="text-black font-semibold">{category.label}</span>
+              <span className="text-black text-xl font-semibold">{category.label}</span>
+              <span className="text-3xl">{category.emoji}</span>
             </div>
           ))}
         </div>
 
-        {/* Right Scroll Arrow */}
-        {showRightArrow && (
+        {/* Right Arrow */}
+        {!atEnd && (
           <button
             onClick={() => scrollCategories("right")}
-            className="absolute right-2 z-10 bg-black/95 text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md"
-            style={{ top: "50%", transform: "translateY(-50%)" }}
+            className="absolute right-0 z-10 bg-black text-white p-3 rounded-full shadow-lg"
           >
-            <IoIosArrowForward size={20} />
+            <IoIosArrowForward size={24} />
           </button>
         )}
       </div>
