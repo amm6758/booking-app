@@ -19,28 +19,33 @@ export default function Home() {
             <div style={{
                 display: "flex",
                 alignItems: "center",
-                marginBottom: "20px",
-                gap: "10px"
+                gap: "10px",
+                marginBottom: "20px"
             }}>
-                {/* Search Label */}
-                <label style={{ fontSize: "1rem", fontWeight: "bold", color: "#333" }}>
-                    Search:
-                </label>
+                {/* Search Label inside Opaque Rectangle */}
+                <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100px",
+                    height: "44px",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                    color: "#333",
+                    backgroundColor: "rgba(0, 0, 0, 0.1)", // Opaque background
+                    borderRadius: "10px", // Rounded edges
+                    textAlign: "center"
+                }}>
+                    Search
+                </div>
 
                 {/* Search Bar with Icon */}
                 <div style={{
                     position: "relative",
                     display: "flex",
-                    alignItems: "center"
+                    alignItems: "center",
+                    width: "300px"
                 }}>
-                    {/* Magnifying Glass Icon (Emoji) */}
-                    <span style={{
-                        position: "absolute",
-                        left: "10px",
-                        fontSize: "1rem",
-                        color: "#888"
-                    }}>🔍</span>
-
                     {/* Search Input */}
                     <input
                         type="text"
@@ -48,11 +53,11 @@ export default function Home() {
                         onChange={(e) => setSearchInput(e.target.value)}
                         placeholder="City, State, Country"
                         style={{
-                            width: "300px",
-                            padding: "10px 10px 10px 35px",
+                            width: "100%",
+                            padding: "10px 40px 10px 10px",
                             fontSize: "1rem",
                             border: "2px solid #ccc",
-                            borderRadius: "5px",
+                            borderRadius: "10px", // Rounded edges
                             outline: "none",
                             textAlign: "left",
                             transition: "border-color 0.2s ease-in-out"
@@ -60,6 +65,15 @@ export default function Home() {
                         onFocus={(e) => e.target.style.borderColor = "#0070f3"}
                         onBlur={(e) => e.target.style.borderColor = "#ccc"}
                     />
+
+                    {/* Magnifying Glass Icon on the Right */}
+                    <span style={{
+                        position: "absolute",
+                        right: "10px",
+                        fontSize: "1rem",
+                        color: "#888",
+                        pointerEvents: "none"
+                    }}>🔍</span>
                 </div>
             </div>
 
@@ -79,7 +93,7 @@ export default function Home() {
                 backgroundColor: "#0070f3",
                 color: "#fff",
                 border: "none",
-                borderRadius: "5px",
+                borderRadius: "10px", // Rounded edges
                 cursor: "pointer"
             }}>
                 Browse Listings
