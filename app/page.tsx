@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { FaSearch } from "react-icons/fa";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -13,7 +14,7 @@ export default function Home() {
     { label: "On a Budget", emoji: "💸" },
     { label: "City", emoji: "🏙️" },
     { label: "Pet Friendly", emoji: "🐶" },
-    { label: "Beach Side", emoji: "🏝️" },
+    { label: "By the Beach", emoji: "🏝️" }, // Updated text
     { label: "Mexico", emoji: "🇲🇽" },
     { label: "USA", emoji: "🇺🇸" },
     { label: "30 Day Rentals", emoji: "📅" },
@@ -32,6 +33,8 @@ export default function Home() {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full p-3 pl-4 pr-12 text-black rounded-full border border-black"
           />
+          {/* Magnifying Glass Icon */}
+          <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl" />
         </div>
 
         {/* Date Picker */}
@@ -51,10 +54,10 @@ export default function Home() {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-[3px] border-black"
+              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4"
             >
-              <span className="text-black text-lg font-semibold">{category.label}</span>
-              <span className="text-2xl">{category.emoji}</span>
+              <span className="text-black text-sm font-normal">{category.label}</span>
+              <span className="text-3xl">{category.emoji}</span>
             </div>
           ))}
         </div>
