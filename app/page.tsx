@@ -46,7 +46,6 @@ export default function Home() {
                     alignItems: "center",
                     width: "300px"
                 }}>
-                    {/* Search Input */}
                     <input
                         type="text"
                         value={searchInput}
@@ -57,7 +56,7 @@ export default function Home() {
                             padding: "10px 40px 10px 10px",
                             fontSize: "1rem",
                             border: "2px solid #ccc",
-                            borderRadius: "10px", // Rounded edges
+                            borderRadius: "10px",
                             outline: "none",
                             textAlign: "left",
                             transition: "border-color 0.2s ease-in-out"
@@ -77,6 +76,43 @@ export default function Home() {
                 </div>
             </div>
 
+            {/* Category Boxes */}
+            <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "10px",
+                marginBottom: "20px"
+            }}>
+                {[
+                    { title: "Party House", emoji: "🎉" },
+                    { title: "Solo Traveler", emoji: "🎒" },
+                    { title: "Luxury Stay", emoji: "🤑" },
+                    { title: "On a Budget", emoji: "💸" }
+                ].map((category, index) => (
+                    <div key={index} style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "150px",
+                        height: "100px",
+                        border: "2px solid black",
+                        borderRadius: "10px",
+                        backgroundColor: "#eee",
+                        fontSize: "1rem",
+                        fontWeight: "500",
+                        color: "gray",
+                        transition: "transform 0.2s ease-in-out",
+                        cursor: "pointer"
+                    }}
+                        onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                        onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+                        <span>{category.title}</span>
+                        <span style={{ fontSize: "0.8rem", marginTop: "5px" }}>{category.emoji}</span>
+                    </div>
+                ))}
+            </div>
+
             {/* Title */}
             <h1 style={{ fontSize: "2.5rem", color: "#333" }}>
                 🚀 Welcome to My Booking Site!
@@ -93,7 +129,7 @@ export default function Home() {
                 backgroundColor: "#0070f3",
                 color: "#fff",
                 border: "none",
-                borderRadius: "10px", // Rounded edges
+                borderRadius: "10px",
                 cursor: "pointer"
             }}>
                 Browse Listings
