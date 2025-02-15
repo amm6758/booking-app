@@ -1,8 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function Home() {
     const [searchInput, setSearchInput] = useState("");
+    const [checkIn, setCheckIn] = useState("");
+    const [checkOut, setCheckOut] = useState("");
+    const scrollRef = useRef<HTMLDivElement>(null);
+
+    // Scroll function for category box container
+    const scrollRight = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
+        }
+    };
 
     return (
         <div style={{
@@ -79,42 +89,107 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Category Boxes */}
+            {/* Check-in & Check-out Section */}
             <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+                display: "flex",
                 gap: "10px",
-                width: "100%",
-                maxWidth: "500px"
+                marginBottom: "20px"
             }}>
-                {[
-                    { title: "Party House", emoji: "🎉" },
-                    { title: "Solo Traveler", emoji: "🎒" },
-                    { title: "Luxury Stay", emoji: "🤑" },
-                    { title: "On a Budget", emoji: "💸" }
-                ].map((category, index) => (
-                    <div key={index} style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        height: "100px",
-                        border: "2px solid black",
-                        borderRadius: "10px",
-                        backgroundColor: "#eee",
+                <input
+                    type="date"
+                    value={checkIn}
+                    onChange={(e) => setCheckIn(e.target.value)}
+                    style={{
+                        padding: "10px",
                         fontSize: "1rem",
-                        fontWeight: "500",
-                        color: "gray",
-                        transition: "transform 0.2s ease-in-out",
-                        cursor: "pointer",
-                        boxSizing: "border-box"
+                        border: "2px solid #ccc",
+                        borderRadius: "10px",
+                        outline: "none",
+                        textAlign: "center",
+                        cursor: "pointer"
                     }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
-                        <span>{category.title}</span>
-                        <span style={{ fontSize: "0.8rem", marginTop: "5px" }}>{category.emoji}</span>
-                    </div>
-                ))}
+                />
+                <input
+                    type="date"
+                    value={checkOut}
+                    onChange={(e) => setCheckOut(e.target.value)}
+                    style={{
+                        padding: "10px",
+                        fontSize: "1rem",
+                        border: "2px solid #ccc",
+                        borderRadius: "10px",
+                        outline: "none",
+                        textAlign: "center",
+                        cursor: "pointer"
+                    }}
+                />
+            </div>
+
+            {/* Category Boxes Scrollable Row */}
+            <div style={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                maxWidth: "600px",
+                overflowX: "hidden",
+                position: "relative"
+            }}>
+                {/* Scrollable Category Boxes */}
+                <div ref={scrollRef} style={{
+                    display: "flex",
+                    gap: "10px",
+                    overflowX: "auto",
+                    whiteSpace: "nowrap",
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                    scrollBehavior: "smooth"
+                }}>
+                    {[
+                        { title: "Party House", emoji: "🎉" },
+                        { title: "Solo Traveler", emoji: "🎒" },
+                        { title: "Luxury Stay", emoji: "🤑" },
+                        { title: "On a Budget", emoji: "💸" }
+                    ].map((category, index) => (
+                        <div key={index} style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            minWidth: "150px",
+                            height: "100px",
+                            border: "2px solid black",
+                            borderRadius: "10px",
+                            backgroundColor: "#eee",
+                            fontSize: "1rem",
+                            fontWeight: "500",
+                            color: "gray",
+                            transition: "transform 0.2s ease-in-out",
+                            cursor: "pointer",
+                            boxSizing: "border-box"
+                        }}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+                            <span>{category.title}</span>
+                            <span style={{ fontSize: "0.8rem", marginTop: "5px" }}>{category.emoji}</span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Scroll Right Arrow */}
+                <button onClick={scrollRight} style={{
+                    position: "absolute",
+                    right: "-30px",
+                    background: "none",
+                    border: "none",
+                    fontSize: "1.5rem",
+                    cursor: "pointer",
+                    color: "#333",
+                    transition: "transform 0.2s ease-in-out"
+                }}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+                    ➡️
+                </button>
             </div>
         </div>
     );
