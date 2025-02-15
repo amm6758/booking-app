@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const categoryRef = useRef(null);
+
   const categories = [
     { label: "Party House", emoji: "🎉" },
     { label: "Solo Traveler", emoji: "🎒" },
@@ -19,6 +21,12 @@ export default function Home() {
     { label: "30 Day Rentals", emoji: "📅" }
   ];
 
+  const scrollCategories = () => {
+    if (categoryRef.current) {
+      categoryRef.current.scrollBy({ left: 150, behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
       {/* Search and Date Picker Section */}
@@ -30,25 +38,29 @@ export default function Home() {
             placeholder="City, State, Country"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-3 pl-4 pr-12 text-black rounded-full border border-gray-400"
+            className="w-full p-3 pl-4 pr-12 text-black rounded-full border border-black"
           />
           <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
         </div>
 
         {/* Date Picker */}
         <div className="flex gap-2">
-          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
-          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
+          <input type="date" className="p-3 text-black rounded-full border border-black" />
+          <input type="date" className="p-3 text-black rounded-full border border-black" />
         </div>
       </div>
 
       {/* Category Boxes Section */}
-      <div className="relative w-full max-w-6xl overflow-hidden mt-6">
-        <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+      <div className="relative w-full max-w-6xl mt-6">
+        <div
+          ref={categoryRef}
+          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+          style={{ scrollBehavior: "smooth" }}
+        >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-center min-w-[120px] p-4 border border-black rounded-lg bg-gray-200 transition-transform hover:scale-105"
+              className="flex flex-col items-center justify-center min-w-[150px] p-4 border-2 border-black rounded-lg bg-gray-200 transition-transform hover:scale-105"
             >
               <span className="text-lg font-semibold text-black">{category.label}</span>
               <span className="text-2xl">{category.emoji}</span>
@@ -56,7 +68,10 @@ export default function Home() {
           ))}
         </div>
         {/* Arrow for Scrolling */}
-        <button className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full hover:scale-110">
+        <button
+          onClick={scrollCategories}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full hover:scale-110 border border-black"
+        >
           <IoIosArrowForward className="text-black text-xl" />
         </button>
       </div>
