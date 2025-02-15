@@ -79,7 +79,7 @@ export default function Home() {
         {showLeftArrow && (
           <button
             onClick={() => scrollCategories("left")}
-            className="absolute left-2 z-10 bg-black text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md"
+            className="absolute left-2 z-10 bg-black/95 text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md"
             style={{ top: "50%", transform: "translateY(-50%)" }}
           >
             <IoIosArrowBack size={20} />
@@ -90,11 +90,12 @@ export default function Home() {
         <div
           ref={categoryRef}
           className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth w-full px-6"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="min-w-[120px] flex flex-col items-center justify-center p-4 border border-black bg-gray-200 rounded-lg cursor-pointer transform transition-transform hover:scale-105"
+              className="min-w-[120px] flex flex-col items-center justify-center p-4 border-[2.5px] border-black bg-gray-200 rounded-lg cursor-pointer transform transition-transform hover:scale-105"
             >
               <span className="text-xl">{category.emoji}</span>
               <span className="text-black font-semibold">{category.label}</span>
@@ -106,7 +107,7 @@ export default function Home() {
         {showRightArrow && (
           <button
             onClick={() => scrollCategories("right")}
-            className="absolute right-2 z-10 bg-black text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md"
+            className="absolute right-2 z-10 bg-black/95 text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md"
             style={{ top: "50%", transform: "translateY(-50%)" }}
           >
             <IoIosArrowForward size={20} />
