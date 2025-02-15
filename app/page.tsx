@@ -6,7 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const categoryRef = useRef<HTMLDivElement | null>(null);
+  const categoryRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     { label: "Party House", emoji: "🎉" },
@@ -22,8 +22,8 @@ export default function Home() {
   ];
 
   const scrollCategories = () => {
-    if (categoryRef.current instanceof HTMLDivElement) {
-      categoryRef.current.scrollBy({ left: 150, behavior: "smooth" });
+    if (categoryRef.current) {
+      categoryRef.current.scrollLeft += 200;
     }
   };
 
@@ -45,34 +45,47 @@ export default function Home() {
 
         {/* Date Picker */}
         <div className="flex gap-2">
-          <input type="date" className="p-3 text-black rounded-full border border-black" />
-          <input type="date" className="p-3 text-black rounded-full border border-black" />
+          <input
+            type="date"
+            className="p-3 text-black rounded-full border border-gray-400"
+          />
+          <input
+            type="date"
+            className="p-3 text-black rounded-full border border-gray-400"
+          />
         </div>
       </div>
 
       {/* Category Boxes Section */}
-      <div className="relative w-full max-w-6xl mt-6">
+      <div className="relative w-full max-w-6xl mt-6 flex items-center">
+        {/* Categories Container */}
         <div
           ref={categoryRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
-          style={{ scrollBehavior: "smooth" }}
+          className="flex overflow-x-auto no-scrollbar gap-4 py-2 px-4"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            scrollBehavior: "smooth",
+          }}
         >
           {categories.map((category, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-center min-w-[150px] p-4 border-2 border-black rounded-lg bg-gray-200 transition-transform hover:scale-105"
+              className="p-4 text-center border-2 border-black rounded-lg bg-gray-200 hover:bg-gray-300 cursor-pointer transform transition-transform duration-200 hover:scale-105"
+              style={{ boxShadow: "0 0 0 2px black inset" }} // Keeps border on hover
             >
-              <span className="text-lg font-semibold text-black">{category.label}</span>
-              <span className="text-2xl">{category.emoji}</span>
+              <span className="text-xl font-semibold">{category.label}</span>
+              <div className="text-2xl mt-1">{category.emoji}</div>
             </div>
           ))}
         </div>
-        {/* Arrow for Scrolling */}
+
+        {/* Scroll Arrow */}
         <button
           onClick={scrollCategories}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full hover:scale-110 border border-black"
+          className="absolute right-0 bg-black text-white p-3 rounded-full hover:scale-110 transition-transform"
         >
-          <IoIosArrowForward className="text-black text-xl" />
+          <IoIosArrowForward size={20} />
         </button>
       </div>
     </div>
