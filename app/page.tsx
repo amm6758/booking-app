@@ -49,8 +49,19 @@ export default function Home() {
         {/* Categories Scroll Container */}
         <div
           ref={categoryRef}
-          className="flex gap-2 w-full overflow-x-auto scrollbar-hide scroll-smooth"
+          className="flex gap-2 w-full overflow-x-auto scroll-smooth"
+          style={{
+            scrollbarWidth: "none", // Hide scrollbar for Firefox
+            msOverflowStyle: "none", // Hide scrollbar for Internet Explorer
+          }}
         >
+          {/* Hide scrollbar for Chrome, Safari, and Edge */}
+          <style jsx>{`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+
           {categories.map((category, index) => (
             <div
               key={index}
