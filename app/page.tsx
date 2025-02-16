@@ -132,11 +132,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Calendar Pop-up */}
+      {/* Calendar Pop-up - Only the Calendar Appears */}
       {calendarOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div ref={calendarRef} className="bg-white p-6 rounded-lg shadow-xl w-[400px] h-[350px] flex flex-col items-center">
-            <h2 className="text-lg font-semibold mb-4 text-black">Select Check In & Check Out Dates</h2>
+            <h2 className="text-lg font-semibold mb-4 text-black">Select Dates</h2>
             <div className="flex gap-4">
               <input type="date" className="p-3 text-black rounded-lg border border-gray-400 w-40" />
               <input type="date" className="p-3 text-black rounded-lg border border-gray-400 w-40" />
