@@ -3,11 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { FaSearch, FaUser, FaBars } from "react-icons/fa";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css"; // Import default calendar styles
 
 export default function Home() {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const categoryRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
@@ -132,18 +135,17 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Calendar Pop-up - Shows ONLY Calendar */}
+      {/* Calendar Pop-up - Shows FULL Calendar */}
       {calendarOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div ref={calendarRef} className="bg-white p-6 rounded-lg shadow-xl w-[450px] h-[400px] flex flex-col items-center">
+          <div ref={calendarRef} className="bg-white p-6 rounded-lg shadow-xl w-[500px] h-[450px] flex flex-col items-center">
             <h2 className="text-lg font-semibold mb-4 text-black">Select Dates</h2>
-            {/* The Calendar Takes Up Most of the Popup */}
-            <div className="w-full flex justify-center">
-              <input
-                type="date"
-                className="p-3 text-black rounded-lg border border-gray-400 w-full text-lg"
-              />
-            </div>
+            {/* Full Calendar Component */}
+            <Calendar
+              onChange={setSelectedDate}
+              value={selectedDate}
+              className="w-full text-lg"
+            />
           </div>
         </div>
       )}
