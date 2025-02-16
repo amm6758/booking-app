@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { FaSearch, FaUser } from "react-icons/fa";
+import { FaSearch, FaUser, FaBars } from "react-icons/fa";
 
 export default function Home() {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const categoryRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     { label: "Party House", emoji: "🎉" },
@@ -22,6 +23,20 @@ export default function Home() {
     { label: "30 Day Rentals", emoji: "📅" },
   ];
 
+  // Close dropdown menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100 relative">
       {/* Header with Logo & Profile Icon */}
@@ -30,11 +45,16 @@ export default function Home() {
         <Image src="/logo.png" alt="Logo" width={50} height={50} className="cursor-pointer" />
 
         {/* Profile Icon with Dropdown */}
-        <div className="relative">
+        <div ref={menuRef} className="relative flex items-center gap-2 cursor-pointer">
+          {/* Hamburger Menu Icon */}
+          <FaBars className="text-2xl text-gray-700" />
+          
+          {/* User Icon */}
           <FaUser
-            className="text-3xl text-gray-700 cursor-pointer"
+            className="text-3xl text-gray-700"
             onClick={() => setMenuOpen(!menuOpen)}
           />
+          
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
               <ul className="flex flex-col">
