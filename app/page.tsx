@@ -7,8 +7,10 @@ import { FaSearch, FaUser, FaBars } from "react-icons/fa";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const categoryRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     { label: "Party House", emoji: "🎉" },
@@ -28,6 +30,20 @@ export default function Home() {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Close calendar when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
+        setCalendarOpen(false);
       }
     }
 
@@ -88,8 +104,12 @@ export default function Home() {
 
         {/* Date Picker */}
         <div className="flex gap-2">
-          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
-          <input type="date" className="p-3 text-black rounded-full border border-gray-400" />
+          <button
+            className="p-3 text-black rounded-full border border-gray-400"
+            onClick={() => setCalendarOpen(true)}
+          >
+            Check In / Check Out
+          </button>
         </div>
       </div>
 
@@ -111,6 +131,25 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Calendar Pop-up */}
+      {calendarOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div ref={calendarRef} className="bg-white p-6 rounded-lg shadow-xl w-[400px] h-[350px] flex flex-col items-center">
+            <h2 className="text-lg font-semibold mb-4 text-black">Select Check In & Check Out Dates</h2>
+            <div className="flex gap-4">
+              <input type="date" className="p-3 text-black rounded-lg border border-gray-400 w-40" />
+              <input type="date" className="p-3 text-black rounded-lg border border-gray-400 w-40" />
+            </div>
+            <button
+              className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              onClick={() => setCalendarOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
