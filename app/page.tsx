@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 
@@ -21,6 +21,9 @@ export default function Home() {
   ];
 
   return (
+    <div className="absolute top-4 left-4">
+      <Image src="/logo.png" alt="StayPay Logo" width={50} height={50} />
+    </div>
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
       {/* Search and Date Picker Section */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4 items-center">
