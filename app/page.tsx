@@ -1,95 +1,17 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import { FaSearch, FaUser, FaBars } from "react-icons/fa";
+import { useState } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css"; // Import default calendar styles
+import "react-calendar/dist/Calendar.css";
+import { FaSearch } from "react-icons/fa";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [calendarOpen, setCalendarOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const categoryRef = useRef<HTMLDivElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const calendarRef = useRef<HTMLDivElement>(null);
-
-  const categories = [
-    { label: "Party House", emoji: "🎉" },
-    { label: "Solo Traveler", emoji: "🎒" },
-    { label: "Luxury Stay", emoji: "🤑" },
-    { label: "On a Budget", emoji: "💸" },
-    { label: "City", emoji: "🏙️" },
-    { label: "Pet Friendly", emoji: "🐶" },
-    { label: "By the Beach", emoji: "🏝️" },
-    { label: "Mexico", emoji: "🇲🇽" },
-    { label: "USA", emoji: "🇺🇸" },
-    { label: "30 Day Rentals", emoji: "📅" },
-  ];
-
-  // Close dropdown menu when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  // Close calendar when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
-        setCalendarOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [showCalendar, setShowCalendar] = useState(false);
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100 relative">
-      {/* Header with Logo & Profile Icon */}
-      <div className="w-full max-w-6xl flex justify-between items-center mb-4 px-4">
-        {/* Logo */}
-        <Image src="/logo.png" alt="Logo" width={50} height={50} className="cursor-pointer" />
-
-        {/* Profile Icon with Dropdown */}
-        <div ref={menuRef} className="relative flex flex-col items-center mr-4">
-          <div className="flex items-center gap-2 cursor-pointer">
-            {/* Hamburger Menu Icon - Opens Dropdown */}
-            <FaBars
-              className="text-2xl text-gray-700"
-              onClick={() => setMenuOpen(!menuOpen)}
-            />
-            
-            {/* User Icon - Opens Dropdown */}
-            <FaUser
-              className="text-3xl text-gray-700"
-              onClick={() => setMenuOpen(!menuOpen)}
-            />
-          </div>
-
-          {menuOpen && (
-            <div className="absolute top-full mt-2 w-40 bg-white border rounded-lg shadow-lg">
-              <ul className="flex flex-col">
-                <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-black">Sign Up</li>
-                <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-black">Login</li>
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
-
+    <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
       {/* Search and Date Picker Section */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4 items-center">
         {/* Search Bar */}
@@ -101,51 +23,36 @@ export default function Home() {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full p-3 pl-4 pr-12 text-black rounded-full border border-black"
           />
-          {/* Magnifying Glass Icon */}
           <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl" />
         </div>
 
-        {/* Date Picker */}
+        {/* Check-in / Check-out */}
         <div className="flex gap-2">
           <button
             className="p-3 text-black rounded-full border border-gray-400"
-            onClick={() => setCalendarOpen(true)}
+            onClick={() => setShowCalendar(true)}
           >
-            Check In / Check Out
+            Select Dates
           </button>
         </div>
       </div>
 
-      {/* Category Boxes Section */}
-      <div className="relative w-full max-w-6xl mt-6 flex items-center">
-        {/* Categories Scroll Container */}
-        <div
-          ref={categoryRef}
-          className="flex gap-2 w-full overflow-x-auto scrollbar-hide scroll-smooth"
-        >
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4"
-            >
-              <span className="text-black text-sm font-normal">{category.label}</span>
-              <span className="text-3xl">{category.emoji}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Calendar Pop-up - Shows FULL Calendar */}
-      {calendarOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div ref={calendarRef} className="bg-white p-6 rounded-lg shadow-xl w-[500px] h-[450px] flex flex-col items-center">
-            <h2 className="text-lg font-semibold mb-4 text-black">Select Dates</h2>
-            {/* Full Calendar Component */}
+      {/* Pop-up Calendar */}
+      {showCalendar && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-semibold text-center mb-4">Select Dates</h2>
             <Calendar
-              onChange={setSelectedDate}
+              onChange={(value) => setSelectedDate(value as Date)}
               value={selectedDate}
               className="w-full text-lg"
             />
+            <button
+              className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-lg"
+              onClick={() => setShowCalendar(false)}
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
