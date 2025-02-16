@@ -95,21 +95,23 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Category Boxes Section (Fixed Background) */}
-      <div className="relative w-full max-w-6xl mt-6 flex items-center bg-gray-100">
-        <div
-          ref={categoryRef}
-          className="flex gap-2 w-full no-scrollbar bg-gray-100 py-4 px-2"
-        >
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4"
-            >
-              <span className="text-black text-sm font-normal">{category.label}</span>
-              <span className="text-3xl">{category.emoji}</span>
-            </div>
-          ))}
+      {/* Category Boxes Section (Fixing Background While Scrolling) */}
+      <div className="relative w-full max-w-6xl mt-6 flex items-center">
+        <div className="w-full bg-gray-100 px-2 py-4">
+          <div
+            ref={categoryRef}
+            className="flex gap-2 w-full no-scrollbar overflow-x-scroll py-4 px-2 bg-gray-100"
+          >
+            {categories.map((category, index) => (
+              <div
+                key={index}
+                className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4"
+              >
+                <span className="text-black text-sm font-normal">{category.label}</span>
+                <span className="text-3xl">{category.emoji}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
