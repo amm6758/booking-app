@@ -118,7 +118,7 @@ export default function Home() {
         {/* Categories Scroll Container */}
         <div
           ref={categoryRef}
-          className="flex gap-2 w-full overflow-x-auto scrollbar-hide scroll-smooth"
+          className="flex gap-2 w-full overflow-x-auto scroll-smooth no-scrollbar"
         >
           {categories.map((category, index) => (
             <div
