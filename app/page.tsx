@@ -95,9 +95,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Category Boxes Section (Scrollbars Removed) */}
-      <div className="relative w-full max-w-6xl mt-6 flex items-center">
-        <div ref={categoryRef} className="flex gap-2 w-full no-scrollbar">
+      {/* Category Boxes Section (Fixed Background) */}
+      <div className="relative w-full max-w-6xl mt-6 flex items-center bg-gray-100">
+        <div
+          ref={categoryRef}
+          className="flex gap-2 w-full no-scrollbar bg-gray-100 py-4 px-2"
+        >
           {categories.map((category, index) => (
             <div
               key={index}
