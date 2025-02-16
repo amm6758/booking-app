@@ -1,6 +1,7 @@
 "use client";
-import Image from "next/image";
+
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { FaSearch } from "react-icons/fa";
 
 export default function Home() {
@@ -14,17 +15,19 @@ export default function Home() {
     { label: "On a Budget", emoji: "💸" },
     { label: "City", emoji: "🏙️" },
     { label: "Pet Friendly", emoji: "🐶" },
-    { label: "By the Beach", emoji: "🏝️" },
+    { label: "By the Beach", emoji: "🏝️" }, // Updated text
     { label: "Mexico", emoji: "🇲🇽" },
     { label: "USA", emoji: "🇺🇸" },
     { label: "30 Day Rentals", emoji: "📅" },
   ];
 
   return (
-    <div className="absolute top-4 left-4">
-      <Image src="/logo.png" alt="StayPay Logo" width={50} height={50} />
-    </div>
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
+      {/* Top Section - Logo */}
+      <div className="w-full max-w-6xl flex justify-start mb-4">
+        <Image src="/logo.png" alt="StayPay Logo" width={60} height={60} />
+      </div>
+
       {/* Search and Date Picker Section */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4 items-center">
         {/* Search Bar */}
@@ -52,19 +55,8 @@ export default function Home() {
         {/* Categories Scroll Container */}
         <div
           ref={categoryRef}
-          className="flex gap-2 w-full overflow-x-auto scroll-smooth"
-          style={{
-            scrollbarWidth: "none", // Hide scrollbar for Firefox
-            msOverflowStyle: "none", // Hide scrollbar for Internet Explorer
-          }}
+          className="flex gap-2 w-full overflow-x-auto scrollbar-hide scroll-smooth"
         >
-          {/* Hide scrollbar for Chrome, Safari, and Edge */}
-          <style jsx>{`
-            div::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-
           {categories.map((category, index) => (
             <div
               key={index}
