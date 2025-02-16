@@ -1,17 +1,60 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FaSearch } from "react-icons/fa";
+import { IoPersonCircleSharp } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const categoryRef = useRef<HTMLDivElement>(null);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
+  const categories = [
+    { label: "Party House", emoji: "🎉" },
+    { label: "Solo Traveler", emoji: "🎒" },
+    { label: "Luxury Stay", emoji: "🤑" },
+    { label: "On a Budget", emoji: "💸" },
+    { label: "City", emoji: "🏙️" },
+    { label: "Pet Friendly", emoji: "🐶" },
+    { label: "By the Beach", emoji: "🏝️" },
+    { label: "Mexico", emoji: "🇲🇽" },
+    { label: "USA", emoji: "🇺🇸" },
+    { label: "30 Day Rentals", emoji: "📅" },
+  ];
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
+      {/* Header Section */}
+      <div className="w-full max-w-6xl flex justify-between items-center mb-4">
+        {/* Logo */}
+        <img src="/logo.png" alt="Logo" className="w-12 h-12" />
+
+        {/* Profile & Hamburger Menu */}
+        <div className="relative flex items-center space-x-4">
+          <RxHamburgerMenu
+            className="text-3xl cursor-pointer"
+            onClick={() => setShowDropdown(!showDropdown)}
+          />
+          <IoPersonCircleSharp
+            className="text-4xl cursor-pointer"
+            onClick={() => setShowDropdown(!showDropdown)}
+          />
+
+          {/* Dropdown Menu */}
+          {showDropdown && (
+            <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg w-40 p-2 z-10">
+              <p className="text-black p-2 cursor-pointer hover:bg-gray-200">Sign Up</p>
+              <p className="text-black p-2 cursor-pointer hover:bg-gray-200">Login</p>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Search and Date Picker Section */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4 items-center">
         {/* Search Bar */}
@@ -34,6 +77,25 @@ export default function Home() {
           >
             Select Dates
           </button>
+        </div>
+      </div>
+
+      {/* Category Boxes Section */}
+      <div className="relative w-full max-w-6xl mt-6 flex items-center">
+        {/* Categories Scroll Container */}
+        <div
+          ref={categoryRef}
+          className="flex gap-2 w-full overflow-x-auto scrollbar-hide scroll-smooth"
+        >
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className="w-[200px] h-[100px] flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg border-2 border-black transition-all duration-300 hover:scale-105 hover:text-xl hover:border-4"
+            >
+              <span className="text-black text-sm font-normal">{category.label}</span>
+              <span className="text-3xl">{category.emoji}</span>
+            </div>
+          ))}
         </div>
       </div>
 
