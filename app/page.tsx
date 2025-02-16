@@ -17,7 +17,7 @@ export default function Home() {
     { label: "On a Budget", emoji: "💸" },
     { label: "City", emoji: "🏙️" },
     { label: "Pet Friendly", emoji: "🐶" },
-    { label: "By the Beach", emoji: "🏝️" }, 
+    { label: "By the Beach", emoji: "🏝️" },
     { label: "Mexico", emoji: "🇲🇽" },
     { label: "USA", emoji: "🇺🇸" },
     { label: "30 Day Rentals", emoji: "📅" },
@@ -40,12 +40,12 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100 relative">
       {/* Header with Logo & Profile Icon */}
-      <div className="w-full max-w-6xl flex justify-between items-center mb-4">
+      <div className="w-full max-w-6xl flex justify-between items-center mb-4 px-4">
         {/* Logo */}
         <Image src="/logo.png" alt="Logo" width={50} height={50} className="cursor-pointer" />
 
         {/* Profile Icon with Dropdown */}
-        <div ref={menuRef} className="relative flex flex-col items-center">
+        <div ref={menuRef} className="relative flex flex-col items-center mr-4">
           <div className="flex items-center gap-2 cursor-pointer">
             {/* Hamburger Menu Icon - Opens Dropdown */}
             <FaBars
