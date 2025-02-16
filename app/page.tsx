@@ -132,27 +132,18 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Calendar Pop-up - Now the Calendar Takes Up Most of the Space */}
+      {/* Calendar Pop-up - Shows ONLY Calendar */}
       {calendarOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div ref={calendarRef} className="bg-white p-6 rounded-lg shadow-xl w-[450px] h-[400px] flex flex-col items-center">
             <h2 className="text-lg font-semibold mb-4 text-black">Select Dates</h2>
-            <div className="grid grid-cols-2 gap-4 w-full">
-              <input
-                type="date"
-                className="p-3 text-black rounded-lg border border-gray-400 w-full text-lg"
-              />
+            {/* The Calendar Takes Up Most of the Popup */}
+            <div className="w-full flex justify-center">
               <input
                 type="date"
                 className="p-3 text-black rounded-lg border border-gray-400 w-full text-lg"
               />
             </div>
-            <button
-              className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-              onClick={() => setCalendarOpen(false)}
-            >
-              Close
-            </button>
           </div>
         </div>
       )}
