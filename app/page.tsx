@@ -46,10 +46,13 @@ export default function Home() {
 
         {/* Profile Icon with Dropdown */}
         <div ref={menuRef} className="relative flex items-center gap-2 cursor-pointer">
-          {/* Hamburger Menu Icon */}
-          <FaBars className="text-2xl text-gray-700" />
+          {/* Hamburger Menu Icon - Opens Dropdown */}
+          <FaBars
+            className="text-2xl text-gray-700"
+            onClick={() => setMenuOpen(!menuOpen)}
+          />
           
-          {/* User Icon */}
+          {/* User Icon - Opens Dropdown */}
           <FaUser
             className="text-3xl text-gray-700"
             onClick={() => setMenuOpen(!menuOpen)}
