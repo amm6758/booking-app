@@ -45,21 +45,23 @@ export default function Home() {
         <Image src="/logo.png" alt="Logo" width={50} height={50} className="cursor-pointer" />
 
         {/* Profile Icon with Dropdown */}
-        <div ref={menuRef} className="relative flex items-center gap-2 cursor-pointer">
-          {/* Hamburger Menu Icon - Opens Dropdown */}
-          <FaBars
-            className="text-2xl text-gray-700"
-            onClick={() => setMenuOpen(!menuOpen)}
-          />
-          
-          {/* User Icon - Opens Dropdown */}
-          <FaUser
-            className="text-3xl text-gray-700"
-            onClick={() => setMenuOpen(!menuOpen)}
-          />
-          
+        <div ref={menuRef} className="relative flex flex-col items-center">
+          <div className="flex items-center gap-2 cursor-pointer">
+            {/* Hamburger Menu Icon - Opens Dropdown */}
+            <FaBars
+              className="text-2xl text-gray-700"
+              onClick={() => setMenuOpen(!menuOpen)}
+            />
+            
+            {/* User Icon - Opens Dropdown */}
+            <FaUser
+              className="text-3xl text-gray-700"
+              onClick={() => setMenuOpen(!menuOpen)}
+            />
+          </div>
+
           {menuOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+            <div className="absolute top-full mt-2 w-40 bg-white border rounded-lg shadow-lg">
               <ul className="flex flex-col">
                 <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-black">Sign Up</li>
                 <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-black">Login</li>
