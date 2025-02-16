@@ -2,10 +2,11 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUser } from "react-icons/fa";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const categoryRef = useRef<HTMLDivElement>(null);
 
   const categories = [
@@ -15,17 +16,34 @@ export default function Home() {
     { label: "On a Budget", emoji: "💸" },
     { label: "City", emoji: "🏙️" },
     { label: "Pet Friendly", emoji: "🐶" },
-    { label: "By the Beach", emoji: "🏝️" }, // Updated text
+    { label: "By the Beach", emoji: "🏝️" }, 
     { label: "Mexico", emoji: "🇲🇽" },
     { label: "USA", emoji: "🇺🇸" },
     { label: "30 Day Rentals", emoji: "📅" },
   ];
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100">
-      {/* Top Section - Logo */}
-      <div className="w-full max-w-6xl flex justify-start mb-4">
-        <Image src="/logo.png" alt="StayPay Logo" width={60} height={60} />
+    <div className="flex flex-col items-center w-full min-h-screen p-6 bg-gray-100 relative">
+      {/* Header with Logo & Profile Icon */}
+      <div className="w-full max-w-6xl flex justify-between items-center mb-4">
+        {/* Logo */}
+        <Image src="/logo.png" alt="Logo" width={50} height={50} className="cursor-pointer" />
+
+        {/* Profile Icon with Dropdown */}
+        <div className="relative">
+          <FaUser
+            className="text-3xl text-gray-700 cursor-pointer"
+            onClick={() => setMenuOpen(!menuOpen)}
+          />
+          {menuOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg">
+              <ul className="flex flex-col">
+                <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Sign Up</li>
+                <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Login</li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Search and Date Picker Section */}
